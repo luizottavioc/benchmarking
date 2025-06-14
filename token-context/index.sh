@@ -10,8 +10,8 @@ else
 fi
 
 CONCURRENCY=${CONCURRENCY:-50} # Number of simultaneous connections, default 50
-DURATION=${DURATION:-30s}      # Test duration, default 30s
-REPORT_FILE=${REPORT_FILE:-wrk_token_results.txt} # File to save wrk report
+DURATION=${DURATION:-15s} # Test duration, default 15s
+REPORT_FILE=${REPORT_FILE:-results.txt} # File to save wrk report
 
 if [ -z "$ENDPOINT" ]; then
     echo "ERROR: ENDPOINT variable not defined in .env!"
@@ -36,17 +36,17 @@ fi
 
 GENERATED_LUA_SCRIPT="$SCRIPT_DIR/token-context.lua"
 echo "Generating Lua script for benchmark in $GENERATED_LUA_SCRIPT..."
-sed "s|-- USERS_PLACEHOLDER|${USER_LIST}|g" "$SCRIPT_DIR/token-context.lua.tmpl" > "$GENERATED_LUA_SCRIPT"
+sed "s|-- USERS_PLACEHOLDER|${USER_LIST}|g" "$SCRIPT_DIR/template-token-context.lua" > "$GENERATED_LUA_SCRIPT"
 
 echo "Starting authentication isolation test with wrk..."
 echo "Endpoint URL: $ENDPOINT"
 echo "Concurrency: $CONCURRENCY"
 echo "Duration: $DURATION"
-echo "Users loaded for testing: $(echo "$USER_LIST" | grep -o "id=" | wc -l)"
+echo "Users loaded for testing: $(echo "$USER_LIST" | grep -o "id =" | wc -l)"
 
 wrk -t 1 -c "$CONCURRENCY" -d "$DURATION" -s "$GENERATED_LUA_SCRIPT" "$ENDPOINT" > "$SCRIPT_DIR/$REPORT_FILE" 2>&1
 
 echo "Authentication isolation test completed. Results saved to $SCRIPT_DIR/$REPORT_FILE"
-echo "Check the $SCRIPT_DIR/$REPORT_FILE file and the terminal output for token leak warnings."
+echo "Check $SCRIPT_DIR/$REPORT_FILE file and the terminal output for token leak warnings."
 
 rm "$GENERATED_LUA_SCRIPT"

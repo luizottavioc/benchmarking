@@ -1,4 +1,4 @@
-./.idea
+.idea
 
-./token-context/.env
-./token-context/wrk_token_results.txt
+token-context/.env
+token-context/wrk_token_results.txt

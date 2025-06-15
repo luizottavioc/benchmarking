@@ -9,14 +9,31 @@ Ideal for quickly stress-testing endpoints that require authentication.
 
 ## Setup
 - Create docker external network (if your test application is a docker container in another docker compose this will be necessary):  
-`docker network create external-network`
+```
+docker network create external-network
+```
+
 - Start the service:  
-`docker compose up -d`
+```
+docker compose up -d
+```
+
 - Adjust `.env` by configuring your own specifications:  
-`cp .env.example .env`
+```
+cp .env.example .env
+```
+
 - Adjust `users.json` by configuring your own requests:  
-`cp users.example.json users.json`
+```
+cp users.example.json users.json
+```
+
 - Access the container:  
-`docker exec -it benchmarking sh`
+```
+docker exec -it benchmarking sh
+```
+
 - Run the benchmark command:  
-`bash index.sh`
+```
+bash index.sh
+```

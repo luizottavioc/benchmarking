@@ -5,7 +5,8 @@ RUN apk add --no-cache \
     luajit \
     lua5.1 \
     lua5.1-cjson \
-    bash
+    bash \
+    jq
 
 WORKDIR /app
 

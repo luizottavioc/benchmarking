@@ -1,0 +1,22 @@
+[
+  {
+    "user_id": 2,
+    "user_token": "token",
+    "payload": { "data": "data" }
+  },
+  {
+    "user_id": 5,
+    "user_token": "token",
+    "payload": { "data": "data" }
+  },
+  {
+    "user_id": 1,
+    "user_token": "token",
+    "payload": { "data": "data" }
+  },
+  {
+    "user_id": 6,
+    "user_token": "token",
+    "payload": { "data": "data" }
+  }
+]

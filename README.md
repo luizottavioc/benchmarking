@@ -1,23 +1,12 @@
 # Benchmarking
 
-- Create docker external network: ```docker network create external-network```
-- Start the `wrk` service: ```docker-compose up -d wrk```
+A simple benchmarking for testing authenticated HTTP requests.  
+Provide the user ID, token, and request payload, then run the benchmark and view the results.  
+Ideal for quickly stress-testing endpoints that require authentication.
+
+## Setup
+- Create docker external network (if your application to test is a docker container in another docker compose): ```docker network create external-network```
+- Start the service: ```docker compose up -d```
 - Access the container: ```docker exec -it benchmarking sh```
-
-## Token context test
-Check if the token sent in the request is the same as the one your API is handling and that there is no token leak between sessions.
-
-### Prerequisites
-- Application endpoint that returns the following body is required:
-```json
-{
-    "data": {
-        "userId": 1,
-        "token": "token..."
-    }
-}
-```
-
-### Run command
-- Adjust the `.env` by adding the endpoint and the corresponding tokens and user ids: `cp ./token-context/.env.example ./token-context/.env`
-- Run the benchmark command: ```./token-context/index.sh```
+- Adjust the `.env` by adding the endpoint and the corresponding tokens and user ids: `cp .env.example .env`
+- Run the benchmark command: ```bash index.sh```

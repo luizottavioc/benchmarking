@@ -1,4 +1,4 @@
 .idea
-
-token-context/.env
-token-context/results.txt
+.env
+results.txt
+users.json
